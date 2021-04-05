@@ -26,17 +26,8 @@ public class PrincipalDetails implements UserDetails {
         this.user = user;
     }*/
 
-    // 해당 User 의 권한을 리턴하는 곳!!
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return user.getRole();
-            }
-        });
-        return collect;
+    public User getUser() {
+        return user;
     }
 
     @Override
@@ -72,4 +63,13 @@ public class PrincipalDetails implements UserDetails {
 
         return true;
     }
+
+    // 해당 User 의 권한을 리턴하는 곳!!
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Collection<GrantedAuthority> collect = new ArrayList<>();
+        collect.add((GrantedAuthority) user::getRole);
+        return collect;
+    }
+
 }

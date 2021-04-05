@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService {
 
-
     private final UserRepository userRepository;
 
     // 시큐리티 session(Authentication(내부 UserDetails))
@@ -29,4 +28,6 @@ public class PrincipalDetailsService implements UserDetailsService {
 
         return null;
     }
+
+
 }

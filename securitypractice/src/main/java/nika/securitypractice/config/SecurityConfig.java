@@ -31,7 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 // login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인 진행.
                 // controller 에 /login 을 만들지 않아도 된다.
+                .usernameParameter("email")
                 .defaultSuccessUrl("/")
                 ;
     }
+
 }
