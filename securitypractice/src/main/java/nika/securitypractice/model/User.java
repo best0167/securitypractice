@@ -1,9 +1,13 @@
 package nika.securitypractice.model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,8 +21,12 @@ import java.sql.Timestamp;
 
 @Entity
 @Getter
-@Builder
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"seq", "email", "password", "nickname", "phone"})
 public class User {
+
+
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
@@ -36,6 +44,14 @@ public class User {
     private Timestamp REG_DATE;
     @UpdateTimestamp
     private Timestamp MOD_DATE;
+
+    public User(Long seq, String email, String password, String nickname, String phone) {
+        this.seq = seq;
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.phone = phone;
+    }
 
 
     // OAuth를 위해 구성한 추가 필드 2개

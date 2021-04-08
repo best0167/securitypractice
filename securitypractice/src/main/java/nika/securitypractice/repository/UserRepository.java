@@ -3,6 +3,7 @@ package nika.securitypractice.repository;
 import nika.securitypractice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 // CRUD 함수를 JpaRepository 가 들고 있음.
@@ -16,6 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     /*// select * from user where email = ?
     public User findByEmail();*/
 
-    Optional<User> findByNickname(String nickname);
+    List<User> findByNickname(String nickname);
+
 
 }

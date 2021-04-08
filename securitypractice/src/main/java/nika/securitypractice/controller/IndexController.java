@@ -1,22 +1,23 @@
 package nika.securitypractice.controller;
 
+import lombok.RequiredArgsConstructor;
 import nika.securitypractice.model.User;
 import nika.securitypractice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller // view 를 리턴
+@RequiredArgsConstructor
 public class IndexController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping({"", "/"})
     public String index() {
@@ -57,13 +58,15 @@ public class IndexController {
         return "joinForm";
     }
 
+
     @PostMapping("/join")
     public String join(User user) {
         System.out.println(user);
-        user.setRole("ROLE_USER");
         String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
+        user.setRole("ROLE_USER");
+        System.out.println(user.getRole());
 
         userRepository.save(user); // 회원가입 잘됨. 비밀번호 : 1234 => 시큐리티로 로그인 불가.
         // 이유는 패스워드가 암호화가 안되었기 때문
