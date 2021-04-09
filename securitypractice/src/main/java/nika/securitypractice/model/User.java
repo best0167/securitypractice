@@ -22,7 +22,6 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"seq", "email", "password", "nickname", "phone"})
 public class User {
 
@@ -51,6 +50,10 @@ public class User {
         this.password = password;
         this.nickname = nickname;
         this.phone = phone;
+    }
+
+    public User() {
+
     }
 
 

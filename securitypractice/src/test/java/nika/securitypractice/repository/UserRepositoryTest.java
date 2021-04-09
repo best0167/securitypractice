@@ -17,13 +17,16 @@ class UserRepositoryTest {
 
     @Test
     @DisplayName("회원가입 테스트")
-    void create() {
+    void create() throws Exception{
         // given
         User user = new User();
 
+        user.setSeq(1L);
         user.setEmail("best0167@naver.com");
         user.setPassword("1234");
         user.setNickname("프레임");
+        user.setPassword("01033331111");
+
 
         // when
         /*Long joinId =
